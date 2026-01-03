@@ -1,0 +1,64 @@
+CLIENT PORTAL REDESIGN PROJECT
+Project Specification Document
+
+OVERVIEW
+Our client, a mid-size financial services firm, wants to redesign their customer-facing portal to improve user experience and add new self-service capabilities. The current portal is outdated (built in 2015) and has received consistently poor customer satisfaction scores.
+
+PROJECT OBJECTIVES
+1. Improve customer satisfaction scores from 3.2 to 4.5+ (out of 5)
+2. Reduce call center volume by 30% through self-service features
+3. Modernize the technology stack for easier maintenance
+4. Ensure WCAG 2.1 accessibility compliance
+
+TIMELINE
+12 weeks total
+- Discovery & Research: Weeks 1-3
+- Design & Prototyping: Weeks 4-7
+- Development: Weeks 6-11
+- Testing & Launch: Weeks 10-12
+
+WORK STREAMS
+
+1. User Research & Discovery
+   Understand current user pain points, behaviors, and needs
+   Required activities: User interviews, survey analysis, competitive analysis
+   Key skills: User research, interviewing, data analysis
+
+2. UX/UI Design
+   Create new information architecture and visual design
+   Required activities: Wireframes, prototypes, design system
+   Key skills: UI design, prototyping, Figma, accessibility
+
+3. Frontend Development
+   Build the new portal interface
+   Required activities: React development, responsive design, API integration
+   Key skills: React, TypeScript, CSS, responsive design
+
+4. Backend & API Development
+   Build APIs and integrate with existing systems
+   Required activities: API development, database work, security
+   Key skills: Node.js, REST APIs, PostgreSQL, authentication
+
+5. Project Management & Governance
+   Coordinate work streams and manage stakeholders
+   Required activities: Sprint planning, status reporting, risk management
+   Key skills: Project management, stakeholder communication, Agile
+
+CRITICAL SUCCESS FACTORS
+- Strong user research to inform design decisions
+- Seamless integration with existing backend systems
+- Executive stakeholder alignment throughout
+- Accessibility compliance from day one
+
+KEY STAKEHOLDERS
+- Chief Digital Officer (executive sponsor)
+- VP of Customer Experience
+- IT Director
+- Customer Service Manager
+
+DELIVERABLES
+- Research findings report
+- Design system and component library
+- Functional portal (staged rollout)
+- Training materials for staff
+- Post-launch monitoring dashboard

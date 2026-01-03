@@ -1,0 +1,38 @@
+BOB KUMAR
+Full Stack Developer
+
+Email: bob.kumar@email.com | GitHub: github.com/bobkumar
+
+ABOUT ME
+Software engineer with 6 years of experience building scalable web applications. Strong background in React, Node.js, and cloud infrastructure. Passionate about clean code and developer experience.
+
+TECHNICAL SKILLS
+Programming Languages: JavaScript, TypeScript, Python, SQL
+Frontend: React, Next.js, Vue.js, HTML/CSS, Tailwind
+Backend: Node.js, Express, FastAPI, GraphQL
+Databases: PostgreSQL, MongoDB, Redis
+Cloud: AWS (EC2, S3, Lambda, RDS), Docker, Kubernetes
+Tools: Git, GitHub Actions, Jenkins, Terraform
+
+WORK EXPERIENCE
+
+Senior Software Engineer | Stripe | 2021-Present
+- Built payment processing features serving 10M+ transactions/month
+- Led migration of legacy services to microservices architecture
+- Mentored 3 junior developers and conducted code reviews
+
+Software Engineer | Airbnb | 2018-2021
+- Developed React components for host dashboard
+- Implemented real-time messaging features using WebSockets
+- Improved page load times by 40% through optimization
+
+Junior Developer | Startup XYZ | 2017-2018
+- Full stack development for e-commerce platform
+- Built REST APIs and integrated third-party services
+
+EDUCATION
+BS Computer Science, MIT, 2017
+
+PROJECTS
+- Open source contributor to React and Node.js ecosystems
+- Built popular developer tool with 5K+ GitHub stars
