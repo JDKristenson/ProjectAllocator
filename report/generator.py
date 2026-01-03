@@ -13,13 +13,21 @@ from analysis.matcher import MatchResult, get_recommended_assignments
 from analysis.gap_analyzer import GapAnalysis
 
 
+# Linear-inspired dark theme
+DARK_BG = '#0f1011'
+DARK_BORDER = '#26272b'
+TEXT_MUTED = '#6b6f82'
+TEXT_SECONDARY = '#A1A7C1'
+TEXT_PRIMARY = '#f7f8f8'
+ACCENT = '#5E6AD2'
+
+
 def create_skills_heatmap(
     match_results: list[MatchResult],
     profiles: list[TeamMemberProfile],
     project_spec: ProjectSpec
 ) -> str:
     """Create a heatmap showing team member vs work stream match scores."""
-    # Build matrix data
     team_members = [p.name for p in profiles]
     work_streams = [ws.name for ws in project_spec.work_streams]
 
@@ -28,7 +36,6 @@ def create_skills_heatmap(
     for member in team_members:
         row = []
         for ws in work_streams:
-            # Find the match result
             result = next(
                 (r for r in match_results if r.team_member == member and r.work_stream == ws),
                 None
@@ -36,25 +43,41 @@ def create_skills_heatmap(
             row.append(result.score if result else 0)
         scores.append(row)
 
+    # Custom colorscale matching Linear aesthetic
+    colorscale = [
+        [0.0, '#2a1f1f'],
+        [0.3, '#3d2828'],
+        [0.5, '#4a3a20'],
+        [0.7, '#3a4a2a'],
+        [1.0, '#1f3d2a']
+    ]
+
     fig = go.Figure(data=go.Heatmap(
         z=scores,
         x=work_streams,
         y=team_members,
-        colorscale='RdYlGn',
+        colorscale=colorscale,
         zmin=0,
         zmax=100,
         text=[[str(s) for s in row] for row in scores],
         texttemplate="%{text}",
-        textfont={"size": 14},
-        hovertemplate="<b>%{y}</b><br>%{x}<br>Score: %{z}<extra></extra>"
+        textfont=dict(size=13, color='#f7f8f8'),
+        hovertemplate="<b>%{y}</b><br>%{x}<br>Score: %{z}<extra></extra>",
+        colorbar=dict(
+            tickfont=dict(color='#6b6f82'),
+            title=dict(text='Score', font=dict(color='#A1A7C1'))
+        )
     ))
 
     fig.update_layout(
-        title="Team-Work Stream Match Scores",
-        xaxis_title="Work Streams",
-        yaxis_title="Team Members",
-        height=max(400, len(team_members) * 50 + 100),
-        margin=dict(l=150, r=50, t=80, b=80)
+        paper_bgcolor=DARK_BG,
+        plot_bgcolor=DARK_BG,
+        font=dict(family='-apple-system, BlinkMacSystemFont, Inter, sans-serif', size=12, color=TEXT_SECONDARY),
+        title=None,
+        height=max(300, len(team_members) * 60 + 80),
+        margin=dict(l=140, r=60, t=20, b=60),
+        xaxis=dict(gridcolor=DARK_BORDER, linecolor=DARK_BORDER, tickfont=dict(color=TEXT_MUTED), tickangle=-35),
+        yaxis=dict(gridcolor=DARK_BORDER, linecolor=DARK_BORDER, tickfont=dict(color=TEXT_MUTED), autorange='reversed')
     )
 
     return fig.to_html(full_html=False, include_plotlyjs='cdn')
@@ -62,14 +85,14 @@ def create_skills_heatmap(
 
 def create_gap_chart(gap_analysis: GapAnalysis) -> str:
     """Create a bar chart showing skill coverage levels."""
-    # Count by coverage level
     coverage_counts = {
         "Uncovered": len(gap_analysis.uncovered_skills),
         "Partial": len(gap_analysis.partially_covered),
         "Well Covered": len(gap_analysis.well_covered)
     }
 
-    colors = ["#e74c3c", "#f39c12", "#27ae60"]
+    # Linear-inspired colors
+    colors = ['#f87171', '#fbbf24', '#4ade80']
 
     fig = go.Figure(data=[
         go.Bar(
@@ -77,15 +100,24 @@ def create_gap_chart(gap_analysis: GapAnalysis) -> str:
             y=list(coverage_counts.values()),
             marker_color=colors,
             text=list(coverage_counts.values()),
-            textposition='auto'
+            textposition='outside',
+            textfont=dict(color='#f7f8f8', size=14),
+            marker=dict(
+                line=dict(width=0)
+            )
         )
     ])
 
     fig.update_layout(
-        title="Skill Coverage Analysis",
-        xaxis_title="Coverage Level",
-        yaxis_title="Number of Skills",
-        height=350
+        paper_bgcolor=DARK_BG,
+        plot_bgcolor=DARK_BG,
+        font=dict(family='-apple-system, BlinkMacSystemFont, Inter, sans-serif', size=12, color=TEXT_SECONDARY),
+        title=None,
+        height=280,
+        showlegend=False,
+        bargap=0.4,
+        xaxis=dict(gridcolor=DARK_BORDER, linecolor=DARK_BORDER, tickfont=dict(color=TEXT_MUTED)),
+        yaxis=dict(gridcolor=DARK_BORDER, linecolor=DARK_BORDER, tickfont=dict(color=TEXT_MUTED))
     )
 
     return fig.to_html(full_html=False, include_plotlyjs=False)
@@ -106,17 +138,25 @@ def create_team_skills_chart(profiles: list[TeamMemberProfile]) -> str:
     fig.add_trace(go.Bar(
         y=[d["name"] for d in data],
         x=[d["skills"] for d in data],
-        name="Skills Count",
         orientation='h',
-        marker_color='#3498db'
+        marker_color='#5E6AD2',
+        text=[d["skills"] for d in data],
+        textposition='outside',
+        textfont=dict(color='#f7f8f8', size=12),
+        marker=dict(line=dict(width=0))
     ))
 
     fig.update_layout(
-        title="Team Skill Counts",
-        xaxis_title="Number of Skills",
-        yaxis_title="",
-        height=max(300, len(profiles) * 40 + 100),
-        margin=dict(l=150)
+        paper_bgcolor=DARK_BG,
+        plot_bgcolor=DARK_BG,
+        font=dict(family='-apple-system, BlinkMacSystemFont, Inter, sans-serif', size=12, color=TEXT_SECONDARY),
+        title=None,
+        height=max(200, len(profiles) * 50 + 60),
+        showlegend=False,
+        margin=dict(l=120, r=40, t=20, b=20),
+        xaxis=dict(gridcolor=DARK_BORDER, linecolor=DARK_BORDER, tickfont=dict(color=TEXT_MUTED)),
+        yaxis=dict(gridcolor=DARK_BORDER, linecolor=DARK_BORDER, tickfont=dict(color=TEXT_MUTED), autorange='reversed'),
+        bargap=0.3
     )
 
     return fig.to_html(full_html=False, include_plotlyjs=False)
